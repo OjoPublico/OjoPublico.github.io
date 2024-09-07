@@ -3,7 +3,8 @@
     <title>Puerto Chancay</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
-    <link href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet"/>    "></script></head>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet" /> "></script>
+</head>
 
 
 <body>
@@ -13,7 +14,9 @@
         <div class="console-content">
             <h1>Las enormes modificaciones a la construcción del puerto de Chancay</h1>
             <p>
-                El área de influencia del proyecto ha sido modificado cuatro veces desde el 2013: creció de 3,3 a 25,9 kilómetros cuadrados en nueve años. Lo que implica un crecimiento de 685%, de acuerdo a lo declarado por la empresa Senace.
+                El área de influencia del proyecto ha sido modificado en cuatro ocasiones desde el 2013. En ese tiempo
+                aumentó ocho veces, pasó de 3,3 a 25,9 kilómetros cuadrados en nueve años, según lo declarado por la
+                empresa a Senace.
             </p>
             <div class="session" id="sliderbar">
                 <div class="year-display">
@@ -175,7 +178,8 @@
         margin-right: 0;
     }
 
-    .year-btn:hover, .year-btn.active {
+    .year-btn:hover,
+    .year-btn.active {
         background-color: #F8BB31;
         color: white;
     }
@@ -205,15 +209,19 @@
             box-sizing: border-box;
             margin: 0;
         }
+
         #console * {
-            font-size: 85%;  /* Reduce font size to 85% for all text elements */
+            font-size: 85%;
+            /* Reduce font size to 85% for all text elements */
         }
 
         #console h1 {
-            font-size: 20px;  /* Adjust this value as needed */
-            line-height: 1.1;  /* Set a specific line height in pixels */
+            font-size: 20px;
+            /* Adjust this value as needed */
+            line-height: 1.1;
+            /* Set a specific line height in pixels */
             margin-bottom: 0px;
-        }  
+        }
 
         /* New styles for the year display*/
         #console .year-display {
@@ -225,17 +233,21 @@
         }
 
         #console .year-display h2 {
-            font-size: 15px;  /* Adjust as needed */
+            font-size: 15px;
+            /* Adjust as needed */
             margin-bottom: 0px;
             margin-top: 0px;
-            
+
         }
 
         #console #active-year {
-            font-size: 25px;  /* Larger font size for the year */
+            font-size: 25px;
+            /* Larger font size for the year */
             font-weight: bold;
-            color: #F8BB31;   /* Assuming you want to keep the same color */
-            display: block;   /*  Ensures it's on its own line */
+            color: #F8BB31;
+            /* Assuming you want to keep the same color */
+            display: block;
+            /*  Ensures it's on its own line */
             margin-top: 0px;
             margin-bottom: 0px;
 
@@ -243,35 +255,45 @@
 
         /* Adjust other elements as needed */
         #console input[type="range"] {
-            width: 90%;  /* Slightly narrower than full width */
-            height: 15px;  /* Slightly taller for better touch interaction */
-            margin: 10px auto;  /* Center the slider and add vertical spacing */
+            width: 90%;
+            /* Slightly narrower than full width */
+            height: 15px;
+            /* Slightly taller for better touch interaction */
+            margin: 10px auto;
+            /* Center the slider and add vertical spacing */
         }
 
         #console input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 25px;   /* Larger thumb size for mobile */
-            height: 25px;  /* Larger thumb size for mobile */
+            width: 25px;
+            /* Larger thumb size for mobile */
+            height: 25px;
+            /* Larger thumb size for mobile */
             background: #F8BB31;
             cursor: pointer;
             border-radius: 50%;
         }
+
         #console input[type="range"]::-moz-range-thumb {
-            width: 25px;  /* Larger thumb size for mobile */
-            height: 25px;  /* Larger thumb size for mobile */
+            width: 25px;
+            /* Larger thumb size for mobile */
+            height: 25px;
+            /* Larger thumb size for mobile */
             background: #F8BB31;
             cursor: pointer;
             border-radius: 50%;
         }
-        
+
         #console button {
-            padding: 5px 10px;  /* Adjust button padding if necessary */
+            padding: 5px 10px;
+            /* Adjust button padding if necessary */
         }
 
         /* Adjust the container of the slider if needed */
         #console #sliderbar {
-            padding: 0 5%;   /*  Add some padding to the slider container */
+            padding: 0 5%;
+            /*  Add some padding to the slider container */
         }
     }
 
@@ -312,6 +334,30 @@
         touchZoomRotate: !isMobile()
     });
 
+    map.on('load', () => {
+        setTimeout(() => {
+            const attributionElement = document.querySelector('.mapboxgl-ctrl-attrib-inner');
+            if (attributionElement) {
+                attributionElement.innerHTML = '<b>Fuente:</b> <a href="https://www.gob.pe/senace" target="_blank">EIA, ITS e informes técnicos del puerto del Chancay</a> | <a href="https://www.ojopublico.com" target="_blank"><b>OjoPúblico</b></a> | © <a href="https://www.mapbox.com/" target="_blank">Mapbox</a> | © <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a>';
+            }
+            
+            const attributionControl = document.querySelector('.mapboxgl-ctrl-attrib');
+            if (attributionControl) {
+                attributionControl.style.backgroundColor = 'rgba(255, 255, 255, 0.6)';
+                attributionControl.style.height = '22px'; // Increase the height
+                attributionControl.style.display = 'flex';
+                attributionControl.style.alignItems = 'center';
+                attributionControl.style.justifyContent = 'center';
+                attributionControl.style.paddingTop = '-0.5px'; // Add some padding to the top
+                // font size
+                attributionControl.style.fontSize = '11px';
+
+                updateAttributionControl();
+            }
+        }, 1000);
+    });
+
+
     // Add this function to check if the device is mobile
     function isMobile() {
         return window.innerWidth <= 768;
@@ -323,7 +369,7 @@
     let isPlaying = false;
     let playInterval;
 
-    map.on('load', () => {        
+    map.on('load', () => {
         years.forEach(year => {
             const layerId = `area-influencia-${year}`;
             map.addSource(layerId, {
@@ -389,7 +435,7 @@
                 map.addSource('viaducto-proyecto-2015', {
                     type: 'geojson',
                     data: './viaducto_proyecto_2015.geojson'
-                });                             
+                });
 
                 map.addLayer({
                     id: 'viaducto-proyecto-2015',
@@ -441,9 +487,9 @@
                     }
                 });
 
-                layers[2020]['proyecto'] = 'area-proyecto-2020';     
+                layers[2020]['proyecto'] = 'area-proyecto-2020';
 
-            }              
+            }
 
             if (year === 2023) {
                 map.addSource('modificacion-proyecto-2023', {
@@ -475,7 +521,7 @@
                     layout: {
                         visibility: 'none'
                     }
-                });                     
+                });
 
                 layers[2023]['viaducto'] = 'area-proyecto-2023';
                 layers[2023]['proyecto'] = 'modificacion-proyecto-2023';
@@ -494,7 +540,7 @@
                 slider.value = selectedYear;
                 updateMap();
                 updateActiveButton(selectedYear);
-                
+
                 // Pause the autoplay when clicking a year button
                 if (isPlaying) {
                     togglePlay();
@@ -504,10 +550,10 @@
 
         function updateMap() {
             const selectedYear = parseInt(slider.value);
-            const closestYear = years.reduce((prev, curr) => 
+            const closestYear = years.reduce((prev, curr) =>
                 Math.abs(curr - selectedYear) < Math.abs(prev - selectedYear) ? curr : prev
             );
-            
+
             // Hide all layers
             years.forEach(year => {
                 map.setLayoutProperty(layers[year].fill, 'visibility', 'none');
@@ -588,7 +634,7 @@
                     interactive: false,
                     attributionControl: false  // This line removes the attribution control
                 });
-                
+
                 // Add center indicator
                 const centerIndicator = document.createElement('div');
                 centerIndicator.id = 'minimap-center-indicator';
